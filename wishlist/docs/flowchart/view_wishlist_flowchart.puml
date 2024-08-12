@@ -1,0 +1,11 @@
+@startuml
+|User|
+start
+:Open Dashboard;
+:Click View Wishlist;
+
+|System|
+:Fetch Wishlist Details;
+:Display Wishlist with Images;
+stop
+@enduml

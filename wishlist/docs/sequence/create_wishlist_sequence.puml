@@ -1,0 +1,12 @@
+@startuml
+actor User
+boundary System
+database Database
+
+User -> System: Open Dashboard
+User -> System: Click Create Wishlist
+User -> System: Submit Wishlist Form
+System -> Database: Save Wishlist
+Database --> System: Wishlist Saved
+System -> User: Show Success Message
+@enduml

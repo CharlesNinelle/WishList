@@ -1,0 +1,13 @@
+@startuml
+|User|
+start
+:Open Dashboard;
+:Click Edit Wishlist;
+:Edit Gift Details;
+:Submit Changes;
+
+|System|
+:Save Updated Gift Details;
+:Show Success Message;
+stop
+@enduml

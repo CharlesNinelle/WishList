@@ -1,0 +1,16 @@
+@startuml
+actor User
+boundary System
+database Database
+
+User -> System: Open Registration Page
+User -> System: Submit Registration Form
+System -> System: Validate Input
+alt Valid Input
+    System -> Database: Create User Account
+    Database --> System: Account Created
+    System -> User: Show Success Message
+else Invalid Input
+    System -> User: Show Error Message
+end
+@enduml

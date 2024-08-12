@@ -1,0 +1,16 @@
+@startuml
+actor User
+boundary System
+database Database
+
+User -> System: Open Login Page
+User -> System: Submit Login Form
+System -> Database: Validate Credentials
+alt Valid Credentials
+    Database --> System: Credentials Valid
+    System -> User: Redirect to Dashboard
+else Invalid Credentials
+    Database --> System: Credentials Invalid
+    System -> User: Show Error Message
+end
+@enduml

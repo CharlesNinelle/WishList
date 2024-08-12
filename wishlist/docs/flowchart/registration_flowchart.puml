@@ -1,0 +1,18 @@
+@startuml
+|User|
+start
+:Open Registration Page;
+:Fill Registration Form;
+:Submit Form;
+
+|System|
+:Validate Input;
+if (Valid Input?) then (yes)
+    :Create User Account;
+    :Send Confirmation Email;
+    :Show Success Message;
+else (no)
+    :Show Error Message;
+endif
+stop
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+|User|
+start
+:Open Wishlist;
+:Select Gift;
+:Click Delete Gift;
+
+|System|
+:Ask for Confirmation;
+if (User Confirms?) then (yes)
+    :Delete Gift;
+    :Show Success Message;
+else (no)
+    :Cancel Deletion;
+endif
+stop
+@enduml

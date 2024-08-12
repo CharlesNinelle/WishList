@@ -1,0 +1,11 @@
+@startuml
+actor User
+boundary System
+database Database
+
+User -> System: Open Dashboard
+User -> System: Click View Wishlist
+System -> Database: Fetch Wishlist Details
+Database --> System: Wishlist Details
+System -> User: Display Wishlist with Images
+@enduml

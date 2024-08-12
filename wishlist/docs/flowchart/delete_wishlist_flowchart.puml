@@ -1,0 +1,17 @@
+@startuml
+|User|
+start
+:Open Dashboard;
+:Select Wishlist;
+:Click Delete Wishlist;
+
+|System|
+:Ask for Confirmation;
+if (User Confirms?) then (yes)
+    :Delete Wishlist and Gifts;
+    :Show Success Message;
+else (no)
+    :Cancel Deletion;
+endif
+stop
+@enduml

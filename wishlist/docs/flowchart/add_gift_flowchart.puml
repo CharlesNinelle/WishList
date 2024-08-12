@@ -1,0 +1,20 @@
+@startuml
+|User|
+start
+:Click Add or + new item;
+:Open Add Item Page;
+:Input Product URL or Name;
+:Click Next;
+
+|System|
+:Extract Image from URL;
+
+|User|
+:Input Comments or Name;
+:Click Save;
+
+|System|
+:Save Gift Details;
+:Show Success Message;
+stop
+@enduml

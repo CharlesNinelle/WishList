@@ -1,0 +1,13 @@
+@startuml
+|User|
+start
+:Open Dashboard;
+:Click Create Wishlist;
+:Fill Wishlist Form;
+:Submit Form;
+
+|System|
+:Save Wishlist;
+:Show Success Message;
+stop
+@enduml

@@ -1,0 +1,18 @@
+@startuml
+actor User
+boundary System
+database Database
+
+User -> System: Open Wishlist
+User -> System: Select Gift
+User -> System: Click Delete Gift
+System -> User: Ask for Confirmation
+alt User Confirms
+    User -> System: Confirm Deletion
+    System -> Database: Delete Gift
+    Database --> System: Gift Deleted
+    System -> User: Show Success Message
+else User Cancels
+    User -> System: Cancel Deletion
+end
+@enduml

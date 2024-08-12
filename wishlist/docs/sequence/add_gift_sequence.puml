@@ -1,0 +1,15 @@
+@startuml
+actor User
+boundary System
+database Database
+
+User -> System: Click Add or + new item
+User -> System: Input Product URL or Name
+User -> System: Click Next
+System -> System: Extract Image from URL
+User -> System: Input Comments or Name
+User -> System: Click Save
+System -> Database: Save Gift Details
+Database --> System: Gift Saved
+System -> User: Show Success Message
+@enduml

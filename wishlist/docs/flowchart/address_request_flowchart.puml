@@ -1,0 +1,25 @@
+@startuml
+|Visitor|
+start
+:Open Shared Wishlist Link;
+:View Wishlist with Images and Links;
+:Click Request Address;
+
+|System|
+:Send Address Request;
+:Notify Wishlist Owner;
+
+|Wishlist Owner|
+:Review Address Request;
+if (Confirm Request?) then (yes)
+    :Send Confirmation;
+    :Update Request Status;
+else (no)
+    :Send Decline;
+    :Update Request Status;
+endif
+
+|System|
+:Notify Visitor;
+stop
+@enduml

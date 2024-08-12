@@ -1,0 +1,11 @@
+@startuml
+actor Visitor
+actor WishlistOwner
+boundary System
+
+Visitor -> System: Open Shared Wishlist Link
+Visitor -> System: Request Address
+System -> WishlistOwner: Notify Address Request
+WishlistOwner -> System: Confirm/Decline Request
+System -> Visitor: Provide Result
+@enduml

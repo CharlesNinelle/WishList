@@ -1,0 +1,246 @@
+@startuml
+
+class UserController {
+    + ResponseEntity<User> registerUser(User user)
+    + ResponseEntity<User> loginUser(LoginRequest loginRequest)
+    + ResponseEntity<User> getUserById(Long id)
+    + ResponseEntity<Void> updateUser(User user)
+    + ResponseEntity<Void> deleteUser(Long id)
+    + ResponseEntity<List<User>> getAllUsers()
+    + ResponseEntity<Void> sendAddressRequest(Long recipientId)
+    + ResponseEntity<Void> respondToAddressRequest(Long requestId, boolean confirmed)
+}
+
+class WishlistController {
+    + ResponseEntity<Wishlist> createWishlist(Wishlist wishlist)
+    + ResponseEntity<Wishlist> getWishlistById(Long id)
+    + ResponseEntity<List<Wishlist>> getWishlistsByUserId(Long userId)
+    + ResponseEntity<Void> updateWishlist(Wishlist wishlist)
+    + ResponseEntity<Void> deleteWishlist(Long id)
+}
+
+class GiftController {
+    + ResponseEntity<Gift> addGift(Gift gift)
+    + ResponseEntity<Gift> getGiftById(Long id)
+    + ResponseEntity<List<Gift>> getGiftsByWishlistId(Long wishlistId)
+    + ResponseEntity<Void> updateGift(Gift gift)
+    + ResponseEntity<Void> deleteGift(Long id)
+}
+
+class AddressRequestController {
+    + ResponseEntity<Void> sendAddressRequest(AddressRequest request)
+    + ResponseEntity<List<AddressRequest>> getReceivedRequests(Long userId)
+    + ResponseEntity<List<AddressRequest>> getSentRequests(Long userId)
+    + ResponseEntity<Void> respondToAddressRequest(Long requestId, boolean confirmed)
+}
+
+interface UserService {
+    + User registerUser(User user)
+    + User loginUser(String email, String password)
+    + User getUserById(Long id)
+    + void updateUser(User user)
+    + void deleteUser(Long id)
+    + List<User> getAllUsers()
+    + void sendAddressRequest(Long requesterId, Long recipientId)
+    + void respondToAddressRequest(Long requestId, boolean confirmed)
+}
+
+class UserServiceImpl {
+    - UserRepository userRepository
+    - AddressRequestRepository addressRequestRepository
+    + User registerUser(User user)
+    + User loginUser(String email, String password)
+    + User getUserById(Long id)
+    + void updateUser(User user)
+    + void deleteUser(Long id)
+    + List<User> getAllUsers()
+    + void sendAddressRequest(Long requesterId, Long recipientId)
+    + void respondToAddressRequest(Long requestId, boolean confirmed)
+}
+
+interface WishlistService {
+    + Wishlist createWishlist(Wishlist wishlist)
+    + Wishlist getWishlistById(Long id)
+    + List<Wishlist> getWishlistsByUserId(Long userId)
+    + void updateWishlist(Wishlist wishlist)
+    + void deleteWishlist(Long id)
+}
+
+class WishlistServiceImpl {
+    - WishlistRepository wishlistRepository
+    + Wishlist createWishlist(Wishlist wishlist)
+    + Wishlist getWishlistById(Long id)
+    + List<Wishlist> getWishlistsByUserId(Long userId)
+    + void updateWishlist(Wishlist wishlist)
+    + void deleteWishlist(Long id)
+}
+
+interface GiftService {
+    + Gift addGift(Gift gift)
+    + Gift getGiftById(Long id)
+    + List<Gift> getGiftsByWishlistId(Long wishlistId)
+    + void updateGift(Gift gift)
+    + void deleteGift(Long id)
+}
+
+class GiftServiceImpl {
+    - GiftRepository giftRepository
+    + Gift addGift(Gift gift)
+    + Gift getGiftById(Long id)
+    + List<Gift> getGiftsByWishlistId(Long wishlistId)
+    + void updateGift(Gift gift)
+    + void deleteGift(Long id)
+}
+
+interface AddressRequestService {
+    + void sendAddressRequest(Long requesterId, Long recipientId)
+    + List<AddressRequest> getReceivedRequests(Long userId)
+    + List<AddressRequest> getSentRequests(Long userId)
+    + void respondToAddressRequest(Long requestId, boolean confirmed)
+}
+
+class AddressRequestServiceImpl {
+    - AddressRequestRepository addressRequestRepository
+    + void sendAddressRequest(Long requesterId, Long recipientId)
+    + List<AddressRequest> getReceivedRequests(Long userId)
+    + List<AddressRequest> getSentRequests(Long userId)
+    + void respondToAddressRequest(Long requestId, boolean confirmed)
+}
+
+class User {
+    + Long id
+    + String name
+    + String email
+    + String password
+    + List<Wishlist> wishlists
+    + List<AddressRequest> sentAddressRequests
+    + List<AddressRequest> receivedAddressRequests
+}
+
+class Wishlist {
+    + Long id
+    + String name
+    + String description
+    + User user
+    + List<Gift> gifts
+}
+
+class Gift {
+    + Long id
+    + String title
+    + String description
+    + String url
+    + String imageUrl
+    + Double price
+    + Wishlist wishlist
+}
+
+class AddressRequest {
+    + Long id
+    + User requester
+    + User recipient
+    + boolean confirmed
+}
+
+interface UserRepository {
+    <<interface>> JpaRepository<User, Long>
+}
+
+interface WishlistRepository {
+    <<interface>> JpaRepository<Wishlist, Long>
+}
+
+interface GiftRepository {
+    <<interface>> JpaRepository<Gift, Long>
+}
+
+interface AddressRequestRepository {
+    <<interface>> JpaRepository<AddressRequest, Long>
+}
+
+class UrlParser {
+    + Map<String, String> getMetaData(String url)
+}
+
+class EmailSender {
+    + void sendEmail(String to, String subject, String body)
+}
+
+class UserMapper {
+    + UserDto toUserDto(User user)
+    + User toUser(UserDto userDto)
+}
+
+class WishlistMapper {
+    + WishlistDto toWishlistDto(Wishlist wishlist)
+    + Wishlist toWishlist(WishlistDto wishlistDto)
+}
+
+class GiftMapper {
+    + GiftDto toGiftDto(Gift gift)
+    + Gift toGift(GiftDto giftDto)
+}
+
+class SecurityConfig {
+    + PasswordEncoder passwordEncoder()
+    + SecurityFilterChain securityFilterChain(HttpSecurity http)
+}
+
+class UserRegisteredEvent {
+    + User user
+}
+
+class GiftAddedEvent {
+    + Gift gift
+}
+
+class GlobalExceptionHandler {
+    + ResponseEntity<Object> handleResourceNotFound(ResourceNotFoundException ex)
+    + ResponseEntity<Object> handleException(Exception ex)
+}
+
+class ResourceNotFoundException {
+    + String message
+}
+
+class ExternalApiService {
+    + Map<String, Object> getProductData(String url)
+}
+
+class PaymentService {
+    + void processPayment(PaymentDetails paymentDetails)
+}
+
+class BirthdayReminderJob {
+    + void sendBirthdayReminders()
+}
+
+class DataCleanupJob {
+    + void cleanOldData()
+}
+
+' Relationships between classes
+User "1" --> "0..*" Wishlist : "has"
+Wishlist "1" --> "0..*" Gift : "contains"
+User "0..*" --> "0..*" AddressRequest : "sends"
+User "0..*" --> "0..*" AddressRequest : "receives"
+AddressRequest "1" --> "1" User : "requester"
+AddressRequest "1" --> "1" User : "recipient"
+
+UserRepository --> User : "manages"
+WishlistRepository --> Wishlist : "manages"
+GiftRepository --> Gift : "manages"
+AddressRequestRepository --> AddressRequest : "manages"
+
+UserServiceImpl --> UserRepository : "uses"
+UserServiceImpl --> AddressRequestRepository : "uses"
+WishlistServiceImpl --> WishlistRepository : "uses"
+GiftServiceImpl --> GiftRepository : "uses"
+AddressRequestServiceImpl --> AddressRequestRepository : "uses"
+
+UserController --> UserServiceImpl : "delegates"
+WishlistController --> WishlistServiceImpl : "delegates"
+GiftController --> GiftServiceImpl : "delegates"
+AddressRequestController --> AddressRequestServiceImpl : "delegates"
+
+@enduml

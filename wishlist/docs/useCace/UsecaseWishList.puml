@@ -1,0 +1,22 @@
+@startuml
+left to right direction
+actor User
+actor Visitor
+
+rectangle "Wish List System" {
+    User --> (Visit Home Page)
+    User --> (Register)
+    User --> (Login)
+    User --> (Create Wishlist)
+    User --> (Add Gift to Wishlist via URL)
+    User --> (View Own Wishlist with Images)
+    User --> (Edit Wishlist)
+    User --> (Delete Wishlist)
+    User --> (Delete Gift)
+    User --> (Share Wishlist Link)
+    User --> (Confirm or Decline Address Request)
+
+    Visitor --> (View Wishlist via Shared Link)
+    Visitor --> (Request Address)
+}
+@enduml

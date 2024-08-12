@@ -1,0 +1,13 @@
+@startuml
+actor User
+boundary System
+database Database
+
+User -> System: Open Dashboard
+User -> System: Click Edit Wishlist
+User -> System: Edit Gift Details
+User -> System: Submit Changes
+System -> Database: Save Updated Gift Details
+Database --> System: Updated Gift Saved
+System -> User: Show Success Message
+@enduml
