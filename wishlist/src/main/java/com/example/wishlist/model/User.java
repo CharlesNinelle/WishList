@@ -1,12 +1,9 @@
 package com.example.wishlist.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -22,5 +19,14 @@ public class User {
     private Gender gender;
 
     private String address;
-    private boolean addressConfirmed; // Флаг для подтверждения адреса
+    private boolean addressConfirmed;  // Flag to confirm the address // Флаг для подтверждения адреса
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Wishlist> wishlists;
+
+    @OneToMany(mappedBy = "requester", cascade = CascadeType.ALL)
+    private List<AddressRequest> sentAddressRequests;
+
+    @OneToMany(mappedBy = "recipient", cascade = CascadeType.ALL)
+    private List<AddressRequest> receivedAddressRequests;
 }
