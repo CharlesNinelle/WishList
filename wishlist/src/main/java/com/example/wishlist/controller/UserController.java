@@ -20,12 +20,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/{id}")
-    public User getUser(@PathVariable Long id) {
-        logger.info("Received request to get user with ID: {}", id);
-        return userService.getUserById(id);
-    }
-
     @PostMapping("/register")
     public User registerUser(@RequestBody User user) {
         logger.info("Received request to register user with email: {}", user.getEmail());
@@ -36,6 +30,12 @@ public class UserController {
     public User loginUser(@RequestBody User user) {
         logger.info("Received request to login user with email: {}", user.getEmail());
         return userService.loginUser(user.getEmail());
+    }
+
+    @GetMapping("/{id}")
+    public User getUserById(@PathVariable Long id) {
+        logger.info("Received request to get user with ID: {}", id);
+        return userService.getUserById(id);
     }
 
     @PutMapping("/{id}/address")
