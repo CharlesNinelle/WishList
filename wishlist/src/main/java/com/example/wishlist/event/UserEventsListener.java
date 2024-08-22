@@ -13,6 +13,7 @@ public class UserEventsListener {
     @EventListener
     public void handleUserRegisteredEvent(UserRegisteredEvent event) {
         logger.info("New user registered: {}", event.getUser().getEmail());
+        // Further processing, such as sending a welcome email
         // Дальнейшая обработка, например, отправка приветственного письма
     }
 
@@ -20,5 +21,6 @@ public class UserEventsListener {
     public void handleUserLoginEvent(UserLoginEvent event) {
         logger.info("User logged in: {}", event.getUser().getEmail());
         // Дальнейшая обработка, например, запись входа в лог
+        // Further processing, such as writing the entry to the log
     }
 }

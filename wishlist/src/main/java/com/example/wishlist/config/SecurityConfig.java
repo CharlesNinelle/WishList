@@ -18,13 +18,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(AbstractHttpConfigurer::disable) // Отключение CSRF защиты
+                .csrf(AbstractHttpConfigurer::disable) // Disabling CSRF protection // Отключение CSRF защиты
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/users/register", "/api/users/login").permitAll()
                         .anyRequest().authenticated()
                 )
-                .formLogin(withDefaults()) // Настройка формы входа по умолчанию
-                .logout(withDefaults());   // Настройка выхода по умолчанию
+                .formLogin(withDefaults()) // Setting up the default login form // Настройка формы входа по умолчанию
+                .logout(withDefaults());   // Setting the default output // Настройка выхода по умолчанию
         return http.build();
     }
 
