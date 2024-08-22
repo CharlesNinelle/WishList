@@ -15,10 +15,10 @@ public class AddressRequest {
     private Long id;
 
     @ManyToOne
-    private User requester; // Пользователь, запрашивающий адрес
+    private User requester;  // User requesting address // Пользователь, запрашивающий адрес
 
     @ManyToOne
-    private User recipient; // Пользователь, чей адрес запрашивается
+    private User recipient; // User whose address is being requested // Пользователь, чей адрес запрашивается
 
-    private boolean confirmed; // Подтверждено или отклонено
+    private boolean confirmed; // Approved or rejected // Подтверждено или отклонено
 }

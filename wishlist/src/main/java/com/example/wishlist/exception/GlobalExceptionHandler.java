@@ -16,7 +16,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<String> resourceNotFoundException(ResourceNotFoundException ex, WebRequest request) {
         this.webRequest = request;
-        String requestDescription = request.getDescription(false); // Получение описания запроса
+        String requestDescription = request.getDescription(false); // Get request description // Получение описания запроса
         String errorMessage = String.format("Resource not found: %s. Request: %s", ex.getMessage(), requestDescription);
         return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
     }
@@ -24,7 +24,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> globalExceptionHandler(Exception ex, WebRequest request) {
         this.webRequest = request;
-        String requestDescription = request.getDescription(false); // Получение описания запроса
+        String requestDescription = request.getDescription(false); // Get request description // Получение описания запроса
         String errorMessage = String.format("Internal server error: %s. Request: %s", ex.getMessage(), requestDescription);
         return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
     }
